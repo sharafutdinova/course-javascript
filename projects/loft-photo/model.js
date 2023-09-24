@@ -8,12 +8,14 @@ export default {
     if (!array.length) {
       return null;
     }
-    return array(parseInt(Math.random() * array.length));
+    const index = Math.round(Math.random() * (array.length - 1));
+    return array[index];
   },
+
   getNextPhoto() {
     const friend = this.getRandomElement(friendsDB);
-    const photoesFriends = photosDB.get(friend.id);
-    const photo = this.getRandomElement(photoesFriends);
+    const photoes = photosDB[friend.id];
+    const photo = this.getRandomElement(photoes);
     return { friend: friend, url: photo.url };
   },
 };
