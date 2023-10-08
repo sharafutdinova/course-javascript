@@ -1,6 +1,6 @@
-import model from './model';
-import pages from './pages';
-import mainPage from './mainPage';
+import model from './model.js';
+import pages from './pages.js';
+import mainPage from './mainPage.js';
 
 export default {
   handleEvents() {

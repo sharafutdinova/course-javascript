@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 const PERM_FRIENDS = 2;
 const PERM_PHOTOS = 4;
-// const APP_ID = 51765642;
 
 VK.init({
   apiId: 51765642,
@@ -53,7 +52,7 @@ export default {
     });
   },
   callAPI(method, params) {
-    params.v = '5.76';
+    params.v = '5.81';
 
     return new Promise((resolve, reject) => {
       VK.api(method, params, (data) => {
@@ -77,7 +76,7 @@ export default {
       fields: ['photo_50', 'photo_100'],
     };
 
-    return this.callApi('friends.get', params);
+    return this.callAPI('friends.get', params);
   },
 
   getPhotos(owner) {
@@ -85,20 +84,19 @@ export default {
       owner_id: owner,
     };
 
-    return this.callApi('photos.getAll', params);
+    return this.callAPI('photos.getAll', params);
   },
 
   photoCache: {},
 
   async getFriendPhotos(id) {
-    const photos = this.photoCache[id];
+    let photos = this.photoCache[id];
 
     if (photos) {
       return photos;
     }
 
-    await this.getPhotos(id);
-    // const photos = вместо этого комментария вставьте код для получения фотографии друга из ВК
+    photos = await this.getPhotos(id);
 
     this.photoCache[id] = photos;
 
